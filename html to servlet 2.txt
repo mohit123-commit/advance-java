@@ -1,0 +1,454 @@
+package voter;
+
+import java.io.PrintWriter;
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Vote
+ */
+@WebServlet("/Vote")
+public class Vote extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Vote() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String name=request.getParameter("name");
+		String page=request.getParameter("age");
+		
+		int age=Integer.parseInt(page);
+		PrintWriter out=response.getWriter();
+		if(age>=18) {
+			out.println(name +"valid for vote");
+		}
+		else {
+			out.println(name +"not valid for voter");
+		}
+		
+		}
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+-----------------------------------------------------------
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="Vote" method="get">
+name:<input type="text" name="name"/>
+age:<input type="text" name="age"/>
+<input type="submit" value="check"/>
+
+</body>
+</html>
+
+***************************************************************
+
+package college;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class College
+ */
+@WebServlet("/College")
+public class College extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+   
+    public College() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String name=request.getParameter("name");
+		String fname=request.getParameter("f");
+		String mname=request.getParameter("m");
+		String college=request.getParameter("col");
+		String address=request.getParameter("add");
+		
+		PrintWriter out=response.getWriter();
+		out.println("name= "+name);
+		out.println("fname= "+fname);
+		out.println("mname= "+mname);
+		out.println("college= "+college);
+		out.println("address= "+address);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+-----------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="College" method="get">
+name:<input type="text" name="name"/>
+fname:<input type="text" name="f"/>
+mname:<input type="text" name="m"/>
+college:<input type="text" name="col"/>
+address:<input type="text" name="add"/>
+<input type="submit" value="check"/>
+
+</body>
+</html>
+
+*************************************************************
+
+package month;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/Month")
+public class Month extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+    public Month() {
+        super();
+        
+    }
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String month=request.getParameter("month");
+		
+		int number=Integer.parseInt(month);
+		PrintWriter out=response.getWriter();
+		
+		switch(number) {
+		case 1: out.println(number+" january");
+		break;
+		case 2: out.println(number+" feburary");
+		break;
+		case 3: out.println(number+" march");
+		break;
+		case 4: out.println(number+" april");
+		break;
+		case 5: out.println(number+" may");
+		break;
+		case 6: out.println(number+" june");
+		break;
+		case 7: out.println(number+" july");
+		break;
+		case 8: out.println(number+" augest");
+		break;
+		case 9: out.println(number+" september");
+		break;
+		case 10: out.println(number+" october");
+		break;
+		case 11: out.println(number+" november");
+		break;
+		case 12: out.println(number+" december");
+		break;
+		default:
+			out.println("number must be less then 13");
+		}
+		
+	
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
+	}
+
+}
+---------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="Month" method="get">
+month:<input type="text" name="month"/>
+
+<input type="submit" value="check"/>
+
+</body>
+</html>
+
+*********************************************************************
+
+package Email;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Email
+ */
+@WebServlet("/Email")
+public class Email extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Email() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String email=request.getParameter("email");
+		String password=request.getParameter("password");
+		
+		PrintWriter out=response.getWriter();
+		out.println("mail= "+email);
+		out.println("password= "+password);
+	
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+--------------------------------------------------------
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<form action="Email" method="get">
+email:<input type="text" name="email"/>
+password:<input type="text" name="password"/>
+<input type="submit" value="check"/>
+
+
+</body>
+</html>
+
+*********************************************************************
+package Email;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Email
+ */
+@WebServlet("/Email")
+public class Email extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Email() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String email=request.getParameter("email");
+		String password=request.getParameter("password");
+		
+		int pd=Integer.parseInt(password);
+		
+		PrintWriter out=response.getWriter();
+		
+		if(email=="abc" && pd==123)
+		{
+			out.println("you are valid for next page");
+		}
+		else
+		{
+			out.println("you are not valid for next page");
+		}
+	
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+-------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<form action="Email" method="get">
+email:<input type="text" name="email"/>
+password:<input type="text" name="password"/>
+<input type="submit" value="check"/>
+
+
+</body>
+</html>
+
+*******************************************************************************
+package maximun;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/Maximum")
+public class Maximum extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+    public Maximum() {
+        super();
+        
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String n1=request.getParameter("n1");
+		String n2=request.getParameter("n2");
+		String n3=request.getParameter("n3");
+		
+		int nm1=Integer.parseInt(n1);
+		int nm2=Integer.parseInt(n2);
+		int nm3=Integer.parseInt(n3);
+		
+		PrintWriter out=response.getWriter();
+		
+		if(nm1>nm2 && nm1>nm3)
+		{
+			out.println(nm1+" is maximun");
+		}
+		if(nm2>nm1 && nm2>nm3)
+		{
+			out.println(nm2+" is maximun");
+		}
+		else
+		{
+			out.println(nm3+" is maximun");
+		}
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+----------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="Maximum" method="get">
+number 1:<input type="text" name="n1"/>
+number 2:<input type="text" name="n2"/>
+number 3:<input type="text" name="n3"/>
+<input type="submit" value="check"/>
+
+</body>
+</html>
+
+*************************************************************
+
+
+
