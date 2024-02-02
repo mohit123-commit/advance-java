@@ -1,0 +1,387 @@
+package request;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/Request")
+public class Request extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+     
+    public Request() {
+        super();
+        
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//generate request
+		response.setContentType("text/html");
+		String email=request.getParameter("mail");
+		String password=request.getParameter("pass");
+		
+		//generate response
+		PrintWriter out=response.getWriter();
+		if(email.equals("abc") && password.equals("123"))
+		{
+			RequestDispatcher rd=request.getRequestDispatcher("Welcome");
+			//how to go to another servlet
+			rd.forward(request, response);
+		}
+		else if(email.equals("") && password.equals(""))
+		{
+			RequestDispatcher rd=request.getRequestDispatcher("request.html");
+			rd.include(request, response);
+		}
+		else if(!(email.equals("abc") && password.equals("123")))
+		{
+			RequestDispatcher rd=request.getRequestDispatcher("request.html");
+			rd.include(request, response);
+		}
+		
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
+	}
+
+}
+-------------------------------------------------------------------------------
+package welcome;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/Welcome")
+public class Welcome extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+   
+    public Welcome() {
+        super();
+       
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out=response.getWriter();
+		out.println("welcome to my page");
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+-------------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="Request" method="get">
+
+email:<input type="text" name="mail"> <br>
+password:<input type="password" name="pass"> <br>
+<input type="submit" value="submit">
+
+</form>
+</body>
+</html>
+************************************************************************************
+package Include;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Include
+ */
+@WebServlet("/Include")
+public class Include extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Include() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//generate request
+				response.setContentType("text/html");
+				String name=request.getParameter("name");
+				String fname=request.getParameter("f");
+				String mname=request.getParameter("m");
+				String contact=request.getParameter("contact");
+				
+				//generate response
+				PrintWriter out=response.getWriter();
+				if(name.equals("mohit") && fname.equals("ganesh") && mname.equals("mithlesh") && contact.equals("8875505252"))
+				{
+					RequestDispatcher rd=request.getRequestDispatcher("Welcome");
+					//how to go to another servlet
+					rd.forward(request, response);
+				}
+	
+				else 
+				{
+					RequestDispatcher rd=request.getRequestDispatcher("include.html");
+					rd.include(request, response);
+				}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+--------------------------------------------------------------------------
+package welcome;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/Welcome")
+public class Welcome extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+   
+    public Welcome() {
+        super();
+       
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out=response.getWriter();
+		out.println("welcome to my page");
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="Include" method="get">
+
+name:<input type="text" name="name"> <br>
+fname:<input type="text" name="f"> <br>
+mname:<input type="text" name="m"> <br>
+contact:<input type="text" name="contact"> <br>
+<input type="submit" value="submit">
+
+</form>
+</body>
+</html>
+*******************************************************************************
+package university;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/University")
+public class University extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+    public University() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String name=request.getParameter("name");
+		String fname=request.getParameter("fname");
+		String mname=request.getParameter("mname");
+		String contact=request.getParameter("contact");
+		String college=request.getParameter("college");
+		String roll=request.getParameter("roll");
+		String stream=request.getParameter("stream");
+		String[] year=request.getParameterValues("year");
+		String address=request.getParameter("address");
+		String hname=request.getParameter("hname");
+		String hnumber=request.getParameter("hnumber");
+		String caddress=request.getParameter("caddress");
+		String gender=request.getParameter("gender");
+		String[] game=request.getParameterValues("game");
+		String category=request.getParameter("cate");
+		String physical=request.getParameter("phy");
+		String[] language=request.getParameterValues("lan");
+		
+		PrintWriter out=response.getWriter();
+		out.println("name= "+name+"<br>");
+		out.println("fname= "+fname+"<br>");
+		out.println("mname= "+mname+"<br>");
+		out.println("contact= "+contact+"<br>");
+		out.println("college="+college+"<br>");
+		out.println("roll number= "+roll+"<br>");
+		out.println("stream= "+stream+"<br>");
+		out.println("year= "+Arrays.toString(year)+"<br>");
+		out.println("address= "+address+"<br>");
+		out.println("HOD name= "+hname+"<br>");
+		out.println("HOD number= "+hnumber+"<br>");
+		out.println("college address= "+caddress+"<br>");
+		out.println("gender= "+gender+"<br>");
+		out.println("game= "+Arrays.toString(game)+"<br>");
+		out.println("category= "+category+"<br>");
+		out.println("physical= "+physical+"<br>");
+		out.println("language= "+Arrays.toString(language)+"<br>");
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+---------------------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="University" method="get">
+name: <input type="text" name="name"> <br><br>
+fname: <input type="text" name="fname"> <br><br>
+mname: <input type="text" name="mname"> <br><br>
+contact: <input type="text" name="contact"> <br><br>
+college: <input type="text" name="college"> <br><br>
+roll number: <input type="text" name="roll"> <br><br>
+
+stream:
+<select name="stream">
+<option value="cs">CS</option>
+<option value="EE">EE</option>
+<option value="ME">ME</option>
+<option value="IT">IT</option>
+</select>    <br><br>
+year:
+<select name="year">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+</select>            <br><br>
+
+address:
+<textarea name="address" rows="4" cols="4"></textarea>      <br><br>
+
+HOD name: <input type="text" name="hname"> <br><br>
+HOD number: <input type="text" name="hnumber"> <br><br>
+
+college address:
+<textarea name="caddress" rows="4" cols=4></textarea>    <br><br>
+
+gender:
+<input type="radio" name="gender" value="male"/>male
+<input type="radio" name="gender" value="female"/>female
+    <br><br>
+
+Games:
+<input type="checkbox" value="tennis" name="game">tennis
+<input type="checkbox" value="cricket" name="game">cricket
+<input type="checkbox" value="tennis" name="game">tennis
+<input type="checkbox" value="football" name="game">football
+<input type="checkbox" value="badminton" name="game">badminton
+<input type="checkbox" value="swimming" name="game">swimming
+<input type="checkbox" value="basketball" name="game">basketball
+<input type="checkbox" value="running" name="game">running     <br><br>
+
+category:
+<input type="radio" name="cate" value="obc"/>obc     
+<input type="radio" name="cate" value="general"/>general 
+<input type="radio" name="cate" value="st"/>st     
+<input type="radio" name="cate" value="sc"/>sc       <br><br>
+
+
+physical able:
+<input type="radio" name="phy" value="yes"/>yes     
+<input type="radio" name="phy" value="no"/>no             <br><br>
+
+language:
+<input type="checkbox" value="hindi" name="lan">hindi
+<input type="checkbox" value="english" name="lan">english
+<input type="checkbox" value="tamil" name="lan">tamil
+<input type="checkbox" value="kannad" name="lan">kannad
+<input type="checkbox" value="spanish" name="lan">spanish
+
+<input type="submit" value="submit">
+
+</form>
+
+</body>
+</html>
+*****************************************************************************************ss
