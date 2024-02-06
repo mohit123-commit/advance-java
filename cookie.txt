@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="Cook" method="get">
+name:<input type="text" name="name"> <br><br>
+age:<input type="text" name="age"> <br><br>
+<input type="submit" value="submit">
+</form>
+
+
+</body>
+</html>
+----------------------------------------------------------------
+package cook;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/Cook")
+public class Cook extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+ 
+    public Cook() {
+        super();
+    
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String name=request.getParameter("name");
+		String age=request.getParameter("age");
+		
+		//make a cookie
+		Cookie cname=new Cookie("name",name);
+		Cookie cage=new Cookie("age",age);
+		
+		//add
+		response.addCookie(cname);
+		response.addCookie(cage);
+		
+		//new form
+		PrintWriter out=response.getWriter();
+		out.println("<form action='Cook1' method='get'>");
+		out.println("contact:<input type='text' name='contact'> <br><br>");
+		out.println("mail:<input type='text' name='mail'> <br><br>");
+		out.println("<input type='submit' value='next'>");
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
+	}
+
+}
+---------------------------------------------------------------------------
+package cook;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/Cook1")
+public class Cook1 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+   
+    public Cook1() {
+        super();
+       
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String contact=request.getParameter("contact");
+		String mail=request.getParameter("mail");
+		
+		//make a cookie
+		Cookie ccontact=new Cookie("contact",contact);
+		Cookie cmail=new Cookie("mail",mail);
+		
+		//add cookie
+		response.addCookie(ccontact);
+		response.addCookie(cmail);
+		
+		//new form
+		PrintWriter out=response.getWriter();
+		out.println("<form action='Cook2' method='get'>");
+		out.println("qualification:<input type='text' name='qualification'> <br><br>");
+		out.println("university:<input type='text' name='university'> <br><br>");
+		out.println("<input type='submit' value='next'>");
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
+	}
+
+}
+-------------------------------------------------------------------------------
+package cook;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/Cook2")
+public class Cook2 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+   
+    public Cook2() {
+        super();
+        
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Cookie[] cookie=request.getCookies();
+		String name=cookie[0].getValue();
+		String age=cookie[1].getValue();
+		String contact=cookie[2].getValue();
+		String mail=cookie[3].getValue();
+		
+		response.setContentType("text/html");
+		String qualification=request.getParameter("qualification");
+		String university=request.getParameter("university");
+		
+		PrintWriter out=response.getWriter();
+		out.println("name: "+name+"<br>");
+		out.println("age: "+age+"<br>");
+		out.println("contact: "+contact+"<br>");
+		out.println("email: "+mail+"<br>");
+		out.println("qualification: "+qualification+"<br>");
+		out.println("university: "+university+"<br>");
+		
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
+	}
+
+}
+************************************************************************
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<form action="Cooka" method="get">
+name:<input type="text" name="name"> <br><br>
+fname:<input type="text" name="fname"> <br><br>
+mname:<input type="text" name="mname"> <br><br>
+<input type="submit" value="submit">
+</form>
+
+</body>
+</html>
+---------------------------------------------------------------------
+package cooka;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/Cooka")
+public class Cooka extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+  
+    public Cooka() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String name=request.getParameter("name");
+		String fname=request.getParameter("fname");
+		String mname=request.getParameter("mname");
+		
+		Cookie cname=new Cookie("name",name);
+		Cookie cfname=new Cookie("fname",fname);
+		Cookie cmname=new Cookie("mname",mname);
+		
+		response.addCookie(cname);
+		response.addCookie(cfname);
+		response.addCookie(cmname);
+		
+		PrintWriter out=response.getWriter();
+		out.println("<form action='Cooka1' method='get'>");
+		out.println("dob:<input type='text' name='dob'> <br><br>");
+		out.println("address:<input type='text' name='address'> <br><br>");
+		out.println("adhar:<input type='text' name='adhar'> <br><br>");
+		out.println("<input type='submit' value='next'>");
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+------------------------------------------------------------------
+package cooka;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/Cooka1")
+public class Cooka1 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+  
+    public Cooka1() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String dob=request.getParameter("dob");
+		String address=request.getParameter("address");
+		String adhar=request.getParameter("adhar");
+		
+		Cookie cdob=new Cookie("dob",dob);
+		Cookie caddress=new Cookie("address",address);
+		Cookie cadhar=new Cookie("adhar",adhar);
+		
+		response.addCookie(cdob);
+		response.addCookie(caddress);
+		response.addCookie(cadhar);
+		
+		PrintWriter out=response.getWriter();
+		out.println("<form action='Cooka2' method='get'>");
+		out.println("mail:<input type='text' name='mail'> <br><br>");
+		out.println("password:<input type='text' name='password'> <br><br>");
+		out.println("<input type='submit' value='next'>");
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+----------------------------------------------------------------------------
+package cooka;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/Cooka2")
+public class Cooka2 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    public Cooka2() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String mail=request.getParameter("mail");
+		String password=request.getParameter("password");
+		
+		Cookie cmail=new Cookie("mail",mail);
+		Cookie cpassword=new Cookie("password",password);
+		
+		response.addCookie(cmail);
+		response.addCookie(cpassword);
+	
+		
+		PrintWriter out=response.getWriter();
+		out.println("<form action='Cooka3' method='get'>");
+		out.println("qualification:<input type='text' name='qualification'> <br><br>");
+		out.println("contact:<input type='text' name='contact'> <br><br>");
+		out.println("<input type='submit' value='next'>");
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+---------------------------------------------------------------------------
+package cooka;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/Cooka3")
+public class Cooka3 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+    public Cooka3() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String qualification=request.getParameter("qualification");
+		String contact=request.getParameter("contact");
+		
+		Cookie cqualification=new Cookie("qualification",qualification);
+		Cookie ccontact=new Cookie("contact",contact);
+		
+		response.addCookie(cqualification);
+		response.addCookie(ccontact);
+	
+		
+		PrintWriter out=response.getWriter();
+		out.println("<form action='Cooka4' method='get'>");
+		out.println("enrollment:<input type='text' name='enrollment'> <br><br>");
+		out.println("<input type='submit' value='next'>");
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+--------------------------------------------------------------------------------------
+package cooka;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/Cooka4")
+public class Cooka4 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+   
+    public Cooka4() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String enrollment=request.getParameter("enrollment");
+		
+		Cookie[] cookie=request.getCookies();
+		String name=cookie[0].getValue();
+		String fname=cookie[1].getValue();
+		String mname=cookie[2].getValue();
+		String dob=cookie[3].getValue();
+		String address=cookie[4].getValue();
+		String adhar=cookie[5].getValue();
+		String mail=cookie[6].getValue();
+		String password=cookie[7].getValue();
+		String qualification=cookie[8].getValue();
+		String contact=cookie[9].getValue();
+		
+
+		PrintWriter out=response.getWriter();
+		out.println("name: "+name+"<br>");
+		out.println("fname: "+fname+"<br>");
+		out.println("mname: "+mname+"<br>");
+		out.println("dob: "+dob+"<br>");
+		out.println("address: "+address+"<br>");
+		out.println("adhar: "+adhar+"<br>");
+		out.println("contact: "+contact+"<br>");
+		out.println("mail: "+mail+"<br>");
+		out.println("qualification: "+qualification+"<br>");
+		out.println("password: "+password+"<br>");
+		out.println("enrollment: "+enrollment+"<br>");
+		
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+**********************************************************************************
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<form action="Cooka" method="get">
+name:<input type="text" name="name"> <br><br>
+fname:<input type="text" name="fname"> <br><br>
+mname:<input type="text" name="mname"> <br><br>
+<input type="submit" value="next">
+</form>
+
+</body>
+</html>
+-------------------------------------------------------------------
+package cooka;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/Cooka")
+public class Cooka extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+  
+    public Cooka() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String name=request.getParameter("name");
+		String fname=request.getParameter("fname");
+		String mname=request.getParameter("mname");
+		
+		Cookie cname=new Cookie("name",name);
+		Cookie cfname=new Cookie("fname",fname);
+		Cookie cmname=new Cookie("mname",mname);
+		
+		response.addCookie(cname);
+		response.addCookie(cfname);
+		response.addCookie(cmname);
+		
+		PrintWriter out=response.getWriter();
+		out.println("<form action='Cooka1' method='get'>");
+		out.println("email:<input type='text' name='email'> <br><br>");
+		out.println("password:<input type='text' name='password'> <br><br>");
+		out.println("<input type='submit' value='next'>");
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+---------------------------------------------------------
+package cooka;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/Cooka1")
+public class Cooka1 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+  
+    public Cooka1() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String email=request.getParameter("email");
+		String password=request.getParameter("password");
+		
+		Cookie cemail=new Cookie("email",email);
+		Cookie cpassword=new Cookie("password",password);
+		
+		
+		response.addCookie(cemail);
+		response.addCookie(cpassword);
+		
+		
+		PrintWriter out=response.getWriter();
+		out.println("<form action='Cooka2' method='get'>");
+		out.println("hobbies: <input type='checkbox' name='hobbies' value='cricket'>cricket ");
+		out.println("<input type='checkbox' name='hobbies' value='badminton'>badminton ");
+		out.println("<input type='checkbox' name='hobbies' value='football'>football ");
+		out.println("<input type='checkbox' name='hobbies' value='basketball'>basketball  <br><br>");
+		
+		out.println("qualification: <select name='qualification'>");
+		out.println("<option value='bca' >bca</option> ");
+		out.println("<option value='ba' >ba</option> ");
+		out.println("<option value='mca' >mca</option> ");
+		out.println("<option value='ma' >ma</option> ");
+		out.println("</select> <br><br>");
+		out.println("<input type='submit' value='next'>");
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+------------------------------------------------------------------------
+package cooka;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/Cooka2")
+public class Cooka2 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    public Cooka2() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String hobbies=request.getParameter("hobbies");
+		String qualification=request.getParameter("qualification");
+		
+//		String hobbiesValue = String.join(",", hobbies);
+		
+		Cookie chobbies=new Cookie("hobbies",hobbies);
+		Cookie cqualification=new Cookie("qualification",qualification);
+		
+		response.addCookie(chobbies);
+		response.addCookie(cqualification);
+	
+		
+		PrintWriter out=response.getWriter();
+		out.println("<form action='Cooka3' method='get'>");
+		out.println("id:<input type='text' name='id'> <br><br>");
+		out.println("gender:<input type='radio' name='gender' value='male'>male ");
+		out.println("<input type='radio' name='gender' value='female'>female <br><br>");
+		out.println("<input type='submit' value='next'>");
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+----------------------------------------------------------------
+package cooka;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/Cooka3")
+public class Cooka3 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+    public Cooka3() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		String id=request.getParameter("id");
+		String gender=request.getParameter("gender");
+		
+		Cookie cid=new Cookie("id",id);
+		Cookie cgender=new Cookie("gender",gender);
+		
+		response.addCookie(cid);
+		response.addCookie(cgender);
+	
+		
+		PrintWriter out=response.getWriter();
+		out.println("<form action='Cooka4' method='get'>");
+		out.println("category:<input type='text' name='category'> <br><br>");
+		out.println("nationality:<input type='text' name='nationality'> <br><br>");
+		out.println("physical able:<input type='radio' name='physical' value='yes'>yes ");
+		out.println("<input type='radio' name='physical' value='no'>no <br><br>");
+		out.println("<input type='submit' value='submit'>");
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+-------------------------------------------------------------------
+package cooka;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/Cooka4")
+public class Cooka4 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+   
+    public Cooka4() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		
+		
+		Cookie[] cookie=request.getCookies();
+		String name=cookie[0].getValue();
+		String fname=cookie[1].getValue();
+		String mname=cookie[2].getValue();
+		String email=cookie[3].getValue();
+		String password=cookie[4].getValue();
+		String hobbies=cookie[5].getValue();
+		String qualification=cookie[6].getValue();
+		String id=cookie[7].getValue();
+		String gender=cookie[8].getValue();
+		
+		String category=request.getParameter("category");
+		String nationality=request.getParameter("nationality");
+		String physical=request.getParameter("physical");
+		
+
+		PrintWriter out=response.getWriter();
+		out.println("name: "+name+"<br>");
+		out.println("fname: "+fname+"<br>");
+		out.println("mname: "+mname+"<br>");
+		out.println("email: "+email+"<br>");
+		out.println("password: "+password+"<br>");
+		out.println("hobbies: "+hobbies+"<br>");
+		out.println("qualification: "+qualification+"<br>");
+		out.println("id: "+id+"<br>");
+		out.println("gender: "+gender+"<br>");
+		out.println("category: "+category+"<br>");
+		out.println("nationality: "+nationality+"<br>");
+		out.println("physical: "+physical+"<br>");
+		
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
